@@ -1,3 +1,4 @@
+/*global jQuery: true, fn: true*/
 /*---------------
  * jQuery iToggle Plugin by Engage Interactive
  * Examples and documentation at: http://labs.engageinteractive.co.uk/itoggle/
