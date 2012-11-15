@@ -118,7 +118,7 @@
 				$object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-'+h+'px' }, settings.speed, settings.easing, function () {
 					$object.removeClass('iTon').addClass('iToff');
 					clickEnabled = true;
-					settings.onSlide.call(this); //Generic callback after the slide has finnished
+					settings.onSlide.call(this); //Generic callback after the slide has finished
 					settings.onSlideOff.call(this); //Callback after the slide turns the toggle off
 				});
 				$('input#'+t).removeAttr('checked');
@@ -127,7 +127,7 @@
 				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-'+h+'px' }, settings.speed, settings.easing, function () {
 					$object.removeClass('iToff').addClass('iTon');
 					clickEnabled = true;
-					settings.onSlide.call(this); //Generic callback after the slide has finnished
+					settings.onSlide.call(this); //Generic callback after the slide has finished
 					settings.onSlideOn.call(this); //Callback after the slide turns the toggle on
 				});
 				$('input#'+t).prop('checked','checked');
