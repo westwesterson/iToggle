@@ -15,21 +15,20 @@
 (function($){
 	$.fn.iToggle = function(options) {
 		
-		clickEnabled = true;
-		
-		var defaults = {
-			type: 'checkbox',
-			keepLabel: true,
-			easing: false,
-			speed: 200,
-			onClick: function(){},
-			onClickOn: function(){},
-			onClickOff: function(){},
-			onSlide: function(){},
-			onSlideOn: function(){},
-			onSlideOff: function(){}
-		},
-		settings = $.extend({}, defaults, options);
+		var clickEnabled = true,
+      defaults = {
+        type: 'checkbox',
+        keepLabel: true,
+        easing: false,
+        speed: 200,
+        onClick: function(){},
+        onClickOn: function(){},
+        onClickOff: function(){},
+        onSlide: function(){},
+        onSlideOn: function(){},
+        onSlideOff: function(){}
+      },
+      settings = $.extend({}, defaults, options);
 		
 
 		this.each(function(){
