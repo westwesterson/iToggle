@@ -13,6 +13,7 @@
 ---------------*/
 
 (function($){
+  'use strict';
 	$.fn.iToggle = function(options) {
 		
 		var clickEnabled = true,
@@ -32,21 +33,23 @@
 		
 
 		this.each(function(){
-			var $this = $(this);
+			var $this = $(this),
+        h = '',
+        lbl = '';
 			if ($this.is("input")) {
 				var id = $this.attr('id');
 				label(settings.keepLabel, id);
 				if($this.attr('checked')){
-					var lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+					lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 					$this.addClass('iT_checkbox').before(lbl);
-					var h=$(lbl).innerHeight();
-					$(lbl).css({'background-position-x': '0%', 'background-position-y': '-'+h+'px'});					
+					h = $(lbl).innerHeight();
+					$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iTon');
-				}else{
-					var lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+				} else {
+					lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
 					$this.addClass('iT_checkbox').before(lbl);
-					var h = $(lbl).innerHeight();
-					$(lbl).css({'background-position-x': '100%', 'background-position-y': '-'+h+'px'});
+					h = $(lbl).innerHeight();
+					$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iToff');
 				}
 			}else{
@@ -54,20 +57,20 @@
 					var id = $(this).attr('id');
 					label(settings.keepLabel, id);
 					//$(this).addClass('iT_checkbox').before('<label class="itoggle" for="'+id+'"><span></span></label>');
-					if($(this).attr('checked')){
-						var lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+					if ($(this).attr('checked')) {
+						lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
-						var h=$(lbl).innerHeight();
+						h = $(lbl).innerHeight();
 						$(lbl).css({'background-position-x': '0%', 'background-position-y': '-'+h+'px'});		
 						$(this).prev('label').addClass('iTon');
-					}else{
-						var lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+					} else {
+						lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
-						var h = $(lbl).innerHeight();
+						h = $(lbl).innerHeight();
 						$(lbl).css({'background-position-x': '100%', 'background-position-y': '-'+h+'px'});
 						$(this).prev('label').addClass('iToff');
 					}
-					if(settings.type == 'radio'){
+					if(settings.type === 'radio'){
 						$(this).prev('label').addClass('iT_radio');
 					}
 				});
@@ -75,8 +78,8 @@
 		});
 		
 		function label(e, id){
-			if(e == true){
-				if(settings.type == 'radio'){
+			if (e === true) {
+				if(settings.type === 'radio'){
 					$('label[for='+id+']').addClass('ilabel_radio');
 				}else{
 					$('label[for='+id+']').addClass('ilabel');
@@ -87,7 +90,7 @@
 		}
 
 		$('label.itoggle').click(function(){
-			if(clickEnabled == true){
+			if (clickEnabled === true) {
 				clickEnabled = false;
 				if($(this).hasClass('iT_radio')){
 					if($(this).hasClass('iTon')){
@@ -102,7 +105,7 @@
 			return false;
 		});
 		$('label.ilabel').click(function(){
-			if(clickEnabled == true){
+			if(clickEnabled === true){
 				clickEnabled = false;
 				slide($(this).next('label.itoggle'));
 			}
@@ -122,7 +125,7 @@
 					settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
 				});
 				$('input#'+t).removeAttr('checked');
-			}else{
+			} else {
 				settings.onClickOn.call($object);
 				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-'+h+'px' }, settings.speed, settings.easing, function () {
 					$object.removeClass('iToff').addClass('iTon');
@@ -132,8 +135,8 @@
 				});
 				$('input#'+t).prop('checked','checked');
 			}
-			if(radio == true){
-				name = $('#'+t).prop('name');
+			if(radio === true){
+				var name = $('#'+t).prop('name');
 				slide($object.siblings('label[for]'));
 			}
 		}
