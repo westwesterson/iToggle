@@ -39,15 +39,13 @@
 			if ($this.is("input")) {
 				var id = $this.attr('id');
 				label(settings.keepLabel, id);
-				if($this.attr('checked')){
-					lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
+        lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 				if ($this.attr('checked')) {
 					$this.addClass('iT_checkbox').before(lbl);
 					h = $(lbl).innerHeight();
 					$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iTon');
 				} else {
-					lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
 					$this.addClass('iT_checkbox').before(lbl);
 					h = $(lbl).innerHeight();
 					$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
@@ -58,14 +56,13 @@
 					var id = $(this).attr('id');
 					label(settings.keepLabel, id);
 					//$(this).addClass('iT_checkbox').before('<label class="itoggle" for="'+id+'"><span></span></label>');
+          lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 					if ($(this).attr('checked')) {
-						lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
 						h = $(lbl).innerHeight();
 						$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 						$(this).prev('label').addClass('iTon');
 					} else {
-						lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
 						h = $(lbl).innerHeight();
 						$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
