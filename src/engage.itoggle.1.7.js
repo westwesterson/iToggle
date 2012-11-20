@@ -12,7 +12,7 @@
  * Requires: jQuery v1.7 or later
 ---------------*/
 
-(function($){
+(function($) {
   'use strict';
 	$.fn.iToggle = function(options) {
 		
@@ -22,17 +22,17 @@
         keepLabel: true,
         easing: false,
         speed: 200,
-        onClick: function(){},
-        onClickOn: function(){},
-        onClickOff: function(){},
-        onSlide: function(){},
-        onSlideOn: function(){},
-        onSlideOff: function(){}
+        onClick: function() {},
+        onClickOn: function() {},
+        onClickOff: function() {},
+        onSlide: function() {},
+        onSlideOn: function() {},
+        onSlideOff: function() {}
       },
       settings = $.extend({}, defaults, options);
 		
 
-		this.each(function(){
+		this.each(function() {
 			var $this = $(this),
         h = '',
         lbl = '';
@@ -41,6 +41,7 @@
 				label(settings.keepLabel, id);
 				if($this.attr('checked')){
 					lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
+				if ($this.attr('checked')) {
 					$this.addClass('iT_checkbox').before(lbl);
 					h = $(lbl).innerHeight();
 					$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
@@ -52,73 +53,73 @@
 					$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iToff');
 				}
-			}else{
-				$this.children('input:'+settings.type).each(function(){
+			} else {
+				$this.children('input:'+settings.type).each(function() {
 					var id = $(this).attr('id');
 					label(settings.keepLabel, id);
 					//$(this).addClass('iT_checkbox').before('<label class="itoggle" for="'+id+'"><span></span></label>');
 					if ($(this).attr('checked')) {
-						lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+						lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
 						h = $(lbl).innerHeight();
-						$(lbl).css({'background-position-x': '0%', 'background-position-y': '-'+h+'px'});		
+						$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 						$(this).prev('label').addClass('iTon');
 					} else {
-						lbl = $('<label class="itoggle" for="'+id+'"><span></span></label>');
+						lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 						$(this).addClass('iT_checkbox').before(lbl);
 						h = $(lbl).innerHeight();
-						$(lbl).css({'background-position-x': '100%', 'background-position-y': '-'+h+'px'});
+						$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
 						$(this).prev('label').addClass('iToff');
 					}
-					if(settings.type === 'radio'){
+					if (settings.type === 'radio') {
 						$(this).prev('label').addClass('iT_radio');
 					}
 				});
 			}
 		});
 		
-		function label(e, id){
+		function label(e, id) {
 			if (e === true) {
-				if(settings.type === 'radio'){
-					$('label[for='+id+']').addClass('ilabel_radio');
+				if (settings.type === 'radio') {
+					$('label[for=' + id + ']').addClass('ilabel_radio');
 				}else{
-					$('label[for='+id+']').addClass('ilabel');
+					$('label[for=' + id + ']').addClass('ilabel');
 				}
-			}else{
-				$('label[for='+id+']').remove();
+			} else {
+				$('label[for=' + id + ']').remove();
 			}
 		}
 
-		$('label.itoggle').click(function(){
+		$('label.itoggle').click(function() {
 			if (clickEnabled === true) {
 				clickEnabled = false;
-				if($(this).hasClass('iT_radio')){
-					if($(this).hasClass('iTon')){
+				if ($(this).hasClass('iT_radio')) {
+					if ($(this).hasClass('iTon')) {
 						clickEnabled = true;
-					}else{
+					} else {
 						slide($(this), true);
 					}
-				}else{
+				} else {
 					slide($(this));
 				}
 			}
 			return false;
 		});
-		$('label.ilabel').click(function(){
-			if(clickEnabled === true){
+		$('label.ilabel').click(function() {
+			if (clickEnabled === true) {
 				clickEnabled = false;
 				slide($(this).next('label.itoggle'));
 			}
 			return false;
 		});
 		
-		function slide($object, radio){
+		function slide($object, radio) {
 			settings.onClick.call($object); // Generic click callback for click at any state.
 			var h = $object.innerHeight(),
         t = $object.prop('for');
 			if ($object.hasClass('iTon')) {
-				settings.onClickOff.call($object); //Click that turns the toggle to off position.
-				$object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-'+h+'px' }, settings.speed, settings.easing, function () {
+				settings.onClickOff.call($object); // Click that turns the toggle to off position.
+				$object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
 					$object.removeClass('iTon').addClass('iToff');
 					clickEnabled = true;
 					settings.onSlide.call(this); // Generic callback after the slide has finished.
@@ -127,16 +128,16 @@
 				$('input#'+t).removeAttr('checked');
 			} else {
 				settings.onClickOn.call($object);
-				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-'+h+'px' }, settings.speed, settings.easing, function () {
+				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
 					$object.removeClass('iToff').addClass('iTon');
 					clickEnabled = true;
 					settings.onSlide.call(this); // Generic callback after the slide has finished.
 					settings.onSlideOn.call(this); // Callback after the slide turns the toggle on.
 				});
-				$('input#'+t).prop('checked','checked');
+				$('input#' + t).prop('checked','checked');
 			}
-			if(radio === true){
-				var name = $('#'+t).prop('name');
+			if (radio === true) {
+				var name = $('#' + t).prop('name');
 				slide($object.siblings('label[for]'));
 			}
 		}
