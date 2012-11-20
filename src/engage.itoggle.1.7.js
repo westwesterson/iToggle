@@ -8,7 +8,7 @@
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
 
- * Version: 1.7 (30-May-2012) by pshiryaev
+ * Version: 1.8 (30-May-2012) by westwesterson (based on changes by pshiryaev)
  * Requires: jQuery v1.7 or later
 ---------------*/
 
