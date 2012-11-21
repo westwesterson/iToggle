@@ -10,32 +10,32 @@
  * Requires: jQuery v1.7 or later
 ---------------*/
 
-(function($) {
+(function ($) {
   'use strict';
-	$.fn.iToggle = function(options) {
-		
+	$.fn.iToggle = function (options) {
+
 		var clickEnabled = true,
       defaults = {
         type: 'checkbox',
         keepLabel: true,
         easing: false,
         speed: 200,
-        onClick: function() {},
-        onClickOn: function() {},
-        onClickOff: function() {},
-        onSlide: function() {},
-        onSlideOn: function() {},
-        onSlideOff: function() {}
+        onClick: function () {},
+        onClickOn: function () {},
+        onClickOff: function () {},
+        onSlide: function () {},
+        onSlideOn: function () {},
+        onSlideOff: function () {}
       },
       settings = $.extend({}, defaults, options);
-		
 
-		this.each(function() {
+		this.each(function () {
 			var $this = $(this),
         h = '',
-        lbl = '';
+        lbl = '',
+        id = '';
 			if ($this.is("input")) {
-				var id = $this.attr('id');
+				id = $this.attr('id');
 				label(settings.keepLabel, id);
         lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 				if ($this.attr('checked')) {
@@ -50,8 +50,8 @@
 					$this.prev('label').addClass('iToff');
 				}
 			} else {
-				$this.children('input:'+settings.type).each(function() {
-					var id = $(this).attr('id');
+				$this.children('input:' + settings.type).each(function () {
+					id = $(this).attr('id');
 					label(settings.keepLabel, id);
 					//$(this).addClass('iT_checkbox').before('<label class="itoggle" for="'+id+'"><span></span></label>');
           lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
@@ -85,7 +85,7 @@
 			}
 		}
 
-		$('label.itoggle').click(function() {
+		$('label.itoggle').click(function () {
 			if (clickEnabled === true) {
 				clickEnabled = false;
 				if ($(this).hasClass('iT_radio')) {
@@ -100,18 +100,21 @@
 			}
 			return false;
 		});
-		$('label.ilabel').click(function() {
+		$('label.ilabel').click(function () {
 			if (clickEnabled === true) {
 				clickEnabled = false;
 				slide($(this).next('label.itoggle'));
 			}
 			return false;
 		});
-		
+
 		function slide($object, radio) {
 			settings.onClick.call($object); // Generic click callback for click at any state.
-			var h = $object.innerHeight(),
+
+			var name = '',
+        h = $object.innerHeight(),
         t = $object.prop('for');
+
 			if ($object.hasClass('iTon')) {
 				settings.onClickOff.call($object); // Click that turns the toggle to off position.
 				$object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
@@ -120,7 +123,7 @@
 					settings.onSlide.call(this); // Generic callback after the slide has finished.
 					settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
 				});
-				$('input#'+t).removeAttr('checked');
+				$('input#' + t).removeAttr('checked');
 			} else {
 				settings.onClickOn.call($object);
 				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
@@ -132,7 +135,7 @@
 				$('input#' + t).prop('checked','checked');
 			}
 			if (radio === true) {
-				var name = $('#' + t).prop('name');
+				name = $('#' + t).prop('name');
 				slide($object.siblings('label[for]'));
 			}
 		}
