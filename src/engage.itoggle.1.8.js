@@ -3,12 +3,10 @@
  * jQuery iToggle Plugin by Engage Interactive
  * Examples and documentation at: http://labs.engageinteractive.co.uk/itoggle/
  * Copyright (c) 2009 Engage Interactive
- * Version: 1.0 (10-JUN-2009)
+ * Version: 1.8 (20-Nov-2012) by westwesterson (based on changes by pshiryaev)
  * Dual licensed under the MIT and GPL licenses:
  * http://www.opensource.org/licenses/mit-license.php
  * http://www.gnu.org/licenses/gpl.html
-
- * Version: 1.8 (30-May-2012) by westwesterson (based on changes by pshiryaev)
  * Requires: jQuery v1.7 or later
 ---------------*/
 
