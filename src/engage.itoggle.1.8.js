@@ -94,21 +94,41 @@
 
       if ($object.hasClass('iTon')) {
         settings.onClickOff.call($object); // Click that turns the toggle to off position.
-        $object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
-          $object.removeClass('iTon').addClass('iToff');
-          clickEnabled = true;
-          settings.onSlide.call(this); // Generic callback after the slide has finished.
-          settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
-        });
+        $object.animate(
+          {
+            backgroundPositionX: '100%',
+            backgroundPositionY: '-' + h + 'px'
+          },
+          {
+            duration: settings.speed,
+            easing: settings.easing,
+            complete: function () {
+              $object.removeClass('iTon').addClass('iToff');
+              clickEnabled = true;
+              settings.onSlide.call(this); // Generic callback after the slide has finished.
+              settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
+            }
+          }
+        );
         $('input#' + t).removeAttr('checked');
       } else {
         settings.onClickOn.call($object);
-        $object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
-          $object.removeClass('iToff').addClass('iTon');
-          clickEnabled = true;
-          settings.onSlide.call(this); // Generic callback after the slide has finished.
-          settings.onSlideOn.call(this); // Callback after the slide turns the toggle on.
-        });
+        $object.animate(
+          {
+            backgroundPositionX: '0%',
+            backgroundPositionY: '-' + h + 'px'
+          },
+          {
+            duration: settings.speed,
+            easing: settings.easing,
+            complete: function () {
+              $object.removeClass('iToff').addClass('iTon');
+              clickEnabled = true;
+              settings.onSlide.call(this); // Generic callback after the slide has finished.
+              settings.onSlideOn.call(this); // Callback after the slide turns the toggle on.
+            }
+          }
+        );
         $('input#' + t).prop('checked', 'checked');
       }
       if (radio === true) {
