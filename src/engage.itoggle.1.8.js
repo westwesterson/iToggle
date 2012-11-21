@@ -29,6 +29,18 @@
       },
       settings = $.extend({}, defaults, options);
 
+    function label(e, id) {
+      if (e === true) {
+        if (settings.type === 'radio') {
+          $('label[for=' + id + ']').addClass('ilabel_radio');
+        } else {
+          $('label[for=' + id + ']').addClass('ilabel');
+        }
+      } else {
+        $('label[for=' + id + ']').remove();
+      }
+    }
+
 		this.each(function () {
 			var $this = $(this),
         h = '',
@@ -72,18 +84,38 @@
 				});
 			}
 		});
-		
-		function label(e, id) {
-			if (e === true) {
-				if (settings.type === 'radio') {
-					$('label[for=' + id + ']').addClass('ilabel_radio');
-				}else{
-					$('label[for=' + id + ']').addClass('ilabel');
-				}
-			} else {
-				$('label[for=' + id + ']').remove();
-			}
-		}
+
+    function slide($object, radio) {
+      settings.onClick.call($object); // Generic click callback for click at any state.
+
+      var name = '',
+        h = $object.innerHeight(),
+        t = $object.prop('for');
+
+      if ($object.hasClass('iTon')) {
+        settings.onClickOff.call($object); // Click that turns the toggle to off position.
+        $object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
+          $object.removeClass('iTon').addClass('iToff');
+          clickEnabled = true;
+          settings.onSlide.call(this); // Generic callback after the slide has finished.
+          settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
+        });
+        $('input#' + t).removeAttr('checked');
+      } else {
+        settings.onClickOn.call($object);
+        $object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
+          $object.removeClass('iToff').addClass('iTon');
+          clickEnabled = true;
+          settings.onSlide.call(this); // Generic callback after the slide has finished.
+          settings.onSlideOn.call(this); // Callback after the slide turns the toggle on.
+        });
+        $('input#' + t).prop('checked', 'checked');
+      }
+      if (radio === true) {
+        name = $('#' + t).prop('name');
+        slide($object.siblings('label[for]'));
+      }
+    }
 
 		$('label.itoggle').click(function () {
 			if (clickEnabled === true) {
@@ -107,38 +139,5 @@
 			}
 			return false;
 		});
-
-		function slide($object, radio) {
-			settings.onClick.call($object); // Generic click callback for click at any state.
-
-			var name = '',
-        h = $object.innerHeight(),
-        t = $object.prop('for');
-
-			if ($object.hasClass('iTon')) {
-				settings.onClickOff.call($object); // Click that turns the toggle to off position.
-				$object.animate({ backgroundPositionX: '100%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
-					$object.removeClass('iTon').addClass('iToff');
-					clickEnabled = true;
-					settings.onSlide.call(this); // Generic callback after the slide has finished.
-					settings.onSlideOff.call(this); // Callback after the slide turns the toggle off.
-				});
-				$('input#' + t).removeAttr('checked');
-			} else {
-				settings.onClickOn.call($object);
-				$object.animate({ backgroundPositionX: '0%', backgroundPositionY: '-' + h + 'px' }, settings.speed, settings.easing, function () {
-					$object.removeClass('iToff').addClass('iTon');
-					clickEnabled = true;
-					settings.onSlide.call(this); // Generic callback after the slide has finished.
-					settings.onSlideOn.call(this); // Callback after the slide turns the toggle on.
-				});
-				$('input#' + t).prop('checked','checked');
-			}
-			if (radio === true) {
-				name = $('#' + t).prop('name');
-				slide($object.siblings('label[for]'));
-			}
-		}
-
 	};
 })(jQuery);
