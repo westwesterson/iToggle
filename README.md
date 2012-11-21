@@ -9,7 +9,9 @@ Updated with support for jQuery 1.7
 Tested on:
 * Chrome
 * IE8-9
+* Safari
+* Firefox 18+
 
 Requirements
 =============
-* jQuery v1.7
+* jQuery v1.7 or 1.8
