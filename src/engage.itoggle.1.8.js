@@ -85,7 +85,7 @@
 			}
 		});
 
-    function slide($object, radio) {
+    function slide($object, radio, keypress) {
       settings.onClick.call($object); // Generic click callback for click at any state.
 
       var name = '',
@@ -110,7 +110,9 @@
             }
           }
         );
-        $('input#' + t).removeAttr('checked');
+        if (keypress !== true) {
+          $('input#' + t).removeAttr('checked');
+        }
       } else {
         settings.onClickOn.call($object);
         $object.animate(
@@ -129,7 +131,9 @@
             }
           }
         );
-        $('input#' + t).prop('checked', 'checked');
+        if (keypress !== true) {
+          $('input#' + t).prop('checked', 'checked');
+        }
       }
       if (radio === true) {
         name = $('#' + t).prop('name');
@@ -144,7 +148,7 @@
 					if ($(this).hasClass('iTon')) {
 						clickEnabled = true;
 					} else {
-						slide($(this), true);
+						slide($(this), true, false);
 					}
 				} else {
 					slide($(this));
@@ -159,5 +163,16 @@
 			}
 			return false;
 		});
+
+    // Add keypress function
+    $('input.iT_checkbox').keypress(function (event) {
+      if (event.which === 32) {
+        if (clickEnabled === true) {
+          clickEnabled = false;
+          slide($(this).prev('label.itoggle'), false, true);
+        }
+      }
+      return true;
+    });
 	};
 }(jQuery));
