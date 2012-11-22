@@ -18,8 +18,20 @@
 	<script type="text/javascript" src="js/global.js"></script>	
 	<script type="text/javascript" src="../src/engage.itoggle.1.8.min.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-		// Start jQuery goodness
+        $(document).ready(function () {
+
+            function statusUpdate(text){
+               $('#console').prepend('<p>' + text + '</p>');
+               $('#console p:nth-child(1)').css({color:'#0F0'});
+               $('#console p:nth-child(2)').css({color:'#0C0'});
+               $('#console p:nth-child(3)').css({color:'#090'});
+               $('#console p:nth-child(4)').css({color:'#090'});
+               $('#console p:nth-child(5)').css({color:'#060'});
+               $('#console p:nth-child(6)').css({color:'#030'});
+               $('#console p:nth-child(7)').remove();
+            }
+
+		   // examples
 			$('#itoggle input#example_1').iToggle({
 				easing: 'easeOutExpo',
 				onClickOn: function(){
@@ -38,48 +50,35 @@
 			$('#itoggle #example_2').iToggle({
 				easing: 'easeOutExpo',
 				onClickOn: function(){
-					statusUpdate('Clicked on '+$(this).attr('for'));
+					statusUpdate('Clicked on ' + $(this).attr('for'));
 				},
 				onSlideOn: function(){
-					statusUpdate('Slide on '+$(this).attr('for'));
+					statusUpdate('Slide on ' + $(this).attr('for'));
 				},
 				onClickOff: function(){
-					statusUpdate('Clicked off '+$(this).attr('for'));
+					statusUpdate('Clicked off ' + $(this).attr('for'));
 				},
 				onSlideOff: function(){
-					statusUpdate('Slide off '+$(this).attr('for'));
+					statusUpdate('Slide off ' + $(this).attr('for'));
 				}
 			});
 			
 			$('#itoggle #example_3').iToggle({
 				easing: 'easeOutExpo',
 				type: 'radio',
-				onClickOn: function(){
-					statusUpdate('Clicked on '+$(this).attr('for'));
+				onClickOn: function() {
+					statusUpdate('Clicked on ' + $(this).attr('for'));
 				},
-				onSlideOn: function(){
-					statusUpdate('Slide on '+$(this).attr('for'));
+				onSlideOn: function() {
+					statusUpdate('Slide on ' + $(this).attr('for'));
 				},
-				onClickOff: function(){
-					statusUpdate('Clicked off '+$(this).attr('for'));
+				onClickOff: function() {
+					statusUpdate('Clicked off ' + $(this).attr('for'));
 				},
 				onSlideOff: function(){
-					statusUpdate('Slide off '+$(this).attr('for'));
+					statusUpdate('Slide off ' + $(this).attr('for'));
 				}
 			});
-			
-			function statusUpdate(text){
-				$('#console').prepend('<p>'+text+'</p>');
-				$('#console p:nth-child(1)').css({color:'#0F0'});
-				$('#console p:nth-child(2)').css({color:'#0C0'});
-				$('#console p:nth-child(3)').css({color:'#090'});
-				$('#console p:nth-child(4)').css({color:'#090'});
-				$('#console p:nth-child(5)').css({color:'#060'});
-				$('#console p:nth-child(6)').css({color:'#030'});
-				$('#console p:nth-child(7)').remove();
-			}
-		
-		// End jQuery goodness
 		});
 	</script>
 
