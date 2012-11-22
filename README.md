@@ -6,7 +6,7 @@ http://labs.engageinteractive.co.uk/itoggle/
 
 Changes since the original:
 * Updated with support for jQuery 1.7+
-* significant code style improvements
+* Significant code style improvements
 * Added a keypress event for accessibility
 
 
