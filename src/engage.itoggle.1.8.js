@@ -52,13 +52,13 @@
         lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 				if ($this.attr('checked')) {
 					$this.addClass('iT_checkbox').before(lbl);
-					h = $(lbl).innerHeight();
-					$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
+					h = lbl.innerHeight();
+					lbl.css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iTon');
 				} else {
 					$this.addClass('iT_checkbox').before(lbl);
-					h = $(lbl).innerHeight();
-					$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
+					h = lbl.innerHeight();
+					lbl.css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
 					$this.prev('label').addClass('iToff');
 				}
 			} else {
@@ -69,13 +69,13 @@
           lbl = $('<label class="itoggle" for="' + id + '"><span></span></label>');
 					if ($(this).attr('checked')) {
 						$(this).addClass('iT_checkbox').before(lbl);
-						h = $(lbl).innerHeight();
-						$(lbl).css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
+						h = lbl.innerHeight();
+						lbl.css({'background-position-x': '0%', 'background-position-y': '-' + h + 'px'});
 						$(this).prev('label').addClass('iTon');
 					} else {
 						$(this).addClass('iT_checkbox').before(lbl);
-						h = $(lbl).innerHeight();
-						$(lbl).css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
+						h = lbl.innerHeight();
+						lbl.css({'background-position-x': '100%', 'background-position-y': '-' + h + 'px'});
 						$(this).prev('label').addClass('iToff');
 					}
 					if (settings.type === 'radio') {
